@@ -2,10 +2,12 @@ package com.udacity.jdnd.course3.critter.schedule;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class ScheduleService {
     public final ScheduleRepository scheduleRepository;
 
@@ -29,7 +31,6 @@ public class ScheduleService {
     public List<Schedule> getSchedulesByEmployeeId(long employeeId) {
         return scheduleRepository.findSchedulesByEmployeeId(employeeId);
     }
-
 
     public Schedule saveSchedule(Schedule schedule) {
         return scheduleRepository.save(schedule);

@@ -4,7 +4,6 @@ import com.udacity.jdnd.course3.critter.pet.Pet;
 import com.udacity.jdnd.course3.critter.pet.PetService;
 import com.udacity.jdnd.course3.critter.user.Employee;
 import com.udacity.jdnd.course3.critter.user.EmployeeService;
-import com.udacity.jdnd.course3.critter.user.EmployeeSkill;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,7 +34,6 @@ public class ScheduleController {
     public ScheduleDTO createSchedule(@RequestBody ScheduleDTO scheduleDTO) {
         List<Employee> employeeList = employeeService.getEmployeesById(scheduleDTO.getEmployeeIds());
         Set<Employee> employeeSet = new HashSet<>(employeeList);
-//        Set<EmployeeSkill> employeeSkillSet = employeeService.getSkillsByEmployeeIds(scheduleDTO.getEmployeeIds());
         List<Pet> petList = petService.getPetsById(scheduleDTO.getPetIds());
         Set<Pet> petSet = new HashSet<>(petList);
 
@@ -46,18 +44,10 @@ public class ScheduleController {
     @GetMapping
     public List<ScheduleDTO> getAllSchedules() {
         List<Schedule> scheduleList = scheduleService.getAllSchedules();
-        List<Long> employeeIds = new ArrayList<>();
         List<ScheduleDTO> scheduleDTOList = new ArrayList<>();
 
         if (!scheduleList.isEmpty()) {
             for (Schedule schedule : scheduleList) {
-                if (!schedule.getEmployees().isEmpty()) {
-                    for (Employee employee : schedule.getEmployees()) {
-                        employeeIds.add(employee.getId());
-                    }
-                }
-
-//                Set<EmployeeSkill> employeeSkillSet = employeeService.getSkillsByEmployeeIds(employeeIds);
                 scheduleDTOList.add(mapScheduleToScheduleDTO(schedule));
             }
         }
@@ -68,18 +58,10 @@ public class ScheduleController {
     @GetMapping("/pet/{petId}")
     public List<ScheduleDTO> getScheduleForPet(@PathVariable long petId) {
         List<Schedule> scheduleList = scheduleService.getSchedulesByPetId(petId);
-        List<Long> employeeIds = new ArrayList<>();
         List<ScheduleDTO> scheduleDTOList = new ArrayList<>();
 
         if (!scheduleList.isEmpty()) {
             for (Schedule schedule : scheduleList) {
-                if (!schedule.getEmployees().isEmpty()) {
-                    for (Employee employee : schedule.getEmployees()) {
-                        employeeIds.add(employee.getId());
-                    }
-                }
-
-//                Set<EmployeeSkill> employeeSkillSet = employeeService.getSkillsByEmployeeIds(employeeIds);
                 scheduleDTOList.add(mapScheduleToScheduleDTO(schedule));
             }
         }
@@ -90,18 +72,10 @@ public class ScheduleController {
     @GetMapping("/employee/{employeeId}")
     public List<ScheduleDTO> getScheduleForEmployee(@PathVariable long employeeId) {
         List<Schedule> scheduleList = scheduleService.getSchedulesByEmployeeId(employeeId);
-        List<Long> employeeIds = new ArrayList<>();
         List<ScheduleDTO> scheduleDTOList = new ArrayList<>();
 
         if (!scheduleList.isEmpty()) {
             for (Schedule schedule : scheduleList) {
-                if (!schedule.getEmployees().isEmpty()) {
-                    for (Employee employee : schedule.getEmployees()) {
-                        employeeIds.add(employee.getId());
-                    }
-                }
-
-//                Set<EmployeeSkill> employeeSkillSet = employeeService.getSkillsByEmployeeIds(employeeIds);
                 scheduleDTOList.add(mapScheduleToScheduleDTO(schedule));
             }
         }
@@ -123,18 +97,10 @@ public class ScheduleController {
         }
 
         List<Schedule> scheduleList = scheduleService.getSchedulesByPetIds(petIds);
-        List<Long> employeeIds = new ArrayList<>();
         List<ScheduleDTO> scheduleDTOList = new ArrayList<>();
 
         if (!scheduleList.isEmpty()) {
             for (Schedule schedule : scheduleList) {
-                if (!schedule.getEmployees().isEmpty()) {
-                    for (Employee employee : schedule.getEmployees()) {
-                        employeeIds.add(employee.getId());
-                    }
-                }
-
-//                Set<EmployeeSkill> employeeSkillSet = employeeService.getSkillsByEmployeeIds(employeeIds);
                 scheduleDTOList.add(mapScheduleToScheduleDTO(schedule));
             }
         }
